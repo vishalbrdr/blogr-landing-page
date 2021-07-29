@@ -1,0 +1,366 @@
+// ## Colors
+
+// ### Primary
+
+$Light-red: hsl(356, 100%, 66%); //(CTA text)
+$Very-light-red: hsl(355, 100%, 74%); //(CTA hover background)
+$Very-dark-blue: hsl(208, 49%, 24%); //(headings)
+
+// ### Neutral
+
+$White: hsl(0, 0%, 100%); //(text)
+$Grayish-blue: hsl(240, 2%, 79%); //(footer text)
+$Very-dark-grayish-blue: hsl(207, 13%, 34%); //(body copy)
+$Very-dark-black-blue: hsl(240, 10%, 16%); //(footer background)
+
+// ### Gradient
+
+// Background gradient $Intro/CTA mobile nav:;
+
+$Very-light-red: hsl(13, 100%, 72%);
+$Light-red: hsl(353, 100%, 62%);
+
+// Background gradient $body:;
+
+$Very-dark-gray-blue: hsl(237, 17%, 21%);
+$Very-dark-desaturated-blue: hsl(237, 23%, 32%);
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@300;600&family=Ubuntu:wght@400;500;700&display=swap");
+
+@mixin anchor-default {
+  text-decoration: none;
+  color: $White;
+  font-size: 1.6rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  &:focus {
+    outline: none;
+  }
+}
+@mixin list-default {
+  list-style: none;
+  font-size: 1.6rem;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  a {
+    @include anchor-default();
+  }
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+}
+.container {
+  width: 80%;
+  @media screen and (max-width: 900px) {
+    width: 90%;
+  }
+}
+.header {
+  background-image: url(../images/bg-pattern-intro.svg),
+    linear-gradient(to right, $Very-light-red, $Light-red);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 80vh;
+  border-bottom-left-radius: 10rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 7rem;
+  @media screen and (max-width: 850px) {
+    height: auto;
+    padding-bottom: 10rem;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 850px) {
+      flex-direction: column;
+      margin: 0;
+      align-items: stretch;
+      position: relative;
+    }
+    &__logo {
+      @media screen and (max-width: 850px) {
+        display: flex;
+        justify-content: space-between;
+      }
+      .menu {
+        display: none;
+        @media screen and (max-width: 850px) {
+          display: flex;
+          align-items: center;
+          .toggle {
+            display: none;
+          }
+        }
+      }
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: 5rem;
+      width: 100%;
+      @media screen and (max-width: 850px) {
+        flex-direction: column;
+        margin: 0;
+        top: 8rem;
+        background-color: $White;
+        padding-bottom: 2rem;
+        position: absolute;
+        border-radius: 0.5rem;
+        box-shadow: 0 5px 1rem 0.5rem
+          rgba($color: $Very-dark-black-blue, $alpha: 0.3);
+      }
+      .nav-links {
+        display: flex;
+        margin-right: auto;
+        @media screen and (max-width: 850px) {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+        & > li {
+          @include list-default();
+          position: relative;
+          @media screen and (max-width: 850px) {
+            margin-top: 2rem;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          &:not(:first-of-type) {
+            margin-left: 4rem;
+            @media screen and (max-width: 850px) {
+              margin-left: 0;
+            }
+          }
+          a {
+            @media screen and (max-width: 850px) {
+              color: $Very-dark-blue;
+              font-weight: 500;
+              font-size: 2rem;
+              &:hover,
+              &:active {
+                color: $Very-dark-grayish-blue;
+              }
+            }
+            img {
+              transition: 300ms;
+              &:first-of-type {
+                @media screen and (max-width: 850px) {
+                  display: none;
+                }
+              }
+              &:last-of-type {
+                display: none;
+                @media screen and (max-width: 850px) {
+                  display: inline;
+                }
+              }
+            }
+          }
+          & > a:hover,
+          & > a:focus {
+            text-decoration: 2px underline;
+            img {
+              transform: rotate(-180deg);
+            }
+          }
+        }
+      }
+      .nav-sub-links {
+        position: absolute;
+        padding: 3rem 2rem;
+        margin-top: 2rem;
+        width: 15rem;
+        left: -30%;
+        background-color: $White;
+        border-radius: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 100ms,
+          opacity 500ms ease-in-out max-height 300ms ease-in-out;
+        box-shadow: 0rem 0rem 1rem 0.1rem
+          rgba($color: $Very-dark-black-blue, $alpha: 0.5);
+        @media screen and (max-width: 850px) {
+          position: static;
+          box-shadow: none;
+          width: 80%;
+          max-height: 0;
+          padding: 0;
+          background-color: $Grayish-blue;
+        }
+        li {
+          @include list-default();
+          &:not(:first-of-type) {
+            margin-top: 1rem;
+          }
+          a {
+            color: $Very-dark-black-blue;
+            font-weight: normal;
+            transition: font-weight 100ms ease;
+            @media screen and (max-width: 850px) {
+              font-weight: 500;
+              color: $Very-dark-grayish-blue;
+            }
+            &:hover,
+            &:focus {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+      & .nav-links > li a:hover,
+      & .nav-links > li a:focus {
+        & + .nav-sub-links {
+          visibility: visible;
+          opacity: 1;
+          @media screen and (max-width: 850px) {
+            max-height: min-content;
+            padding: 2rem;
+          }
+        }
+      }
+      & .nav-links > li:hover {
+        & .nav-sub-links {
+          visibility: visible;
+          opacity: 1;
+          @media screen and (max-width: 850px) {
+            max-height: min-content;
+            padding: 2rem;
+          }
+        }
+      }
+      & .nav-sub-links a:focus {
+        visibility: visible;
+        opacity: 1;
+        @media screen and (max-width: 850px) {
+          max-height: min-content;
+          padding: 2rem;
+        }
+      }
+      .user {
+        display: flex;
+        align-items: center;
+        @media screen and (max-width: 850px) {
+          flex-direction: column;
+          border-top: 1px solid $Grayish-blue;
+          margin-top: 2rem;
+          width: 80%;
+        }
+        a {
+          @include anchor-default();
+          &:first-of-type {
+            @media screen and (max-width: 850px) {
+              color: $Very-dark-black-blue;
+              padding: 2rem;
+              &:hover {
+                color: rgba($color: $Very-dark-black-blue, $alpha: 0.5);
+              }
+            }
+          }
+          &:hover {
+            color: rgba($color: $White, $alpha: 0.8);
+          }
+          &:last-of-type {
+            margin-left: 4rem;
+            background-color: $White;
+            padding: 1.5rem 4rem;
+            border-radius: 5rem;
+            color: $Light-red;
+            transition: color 200ms ease-in-out,
+              background-color 200ms ease-in-out;
+            @media screen and (max-width: 850px) {
+              margin-left: 0;
+              background-image: linear-gradient(
+                to right,
+                $Very-light-red,
+                $Light-red
+              );
+              color: $White;
+            }
+            &:hover,
+            &:focus {
+              background-color: rgba($color: $White, $alpha: 0.3);
+              color: $White;
+            }
+          }
+        }
+      }
+      &.nav {
+        @media screen and (max-width: 850px) {
+          display: none;
+        }
+      }
+    }
+  }
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin-top: 12rem;
+    text-align: center;
+    font-family: "Overpass", sans-serif;
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 2rem;
+      @media screen and (max-width: 500px) {
+        font-size: 3.5rem;
+      }
+    }
+    p {
+      font-size: 2rem;
+    }
+    .buttons {
+      margin-top: 4rem;
+      button {
+        border-radius: 5rem;
+        font-size: 1.6rem;
+        width: 13rem;
+        padding: 1.4rem 0;
+        font-family: "Ubuntu";
+        border: none;
+        outline: none;
+        font-weight: 700;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:first-of-type {
+          background-color: $White;
+          color: $Light-red;
+          margin-right: 0.5rem;
+
+          &:hover,
+          &:focus {
+            background-color: rgba($color: $White, $alpha: 0.3);
+            color: $White;
+          }
+        }
+        &:last-of-type {
+          margin-left: 0.5rem;
+          color: white;
+          border: 1px solid;
+
+          &:hover,
+          &:focus {
+            background-color: $White;
+            color: $Light-red;
+          }
+        }
+      }
+    }
+  }
+}
+@import "section";
+@import "footer";
